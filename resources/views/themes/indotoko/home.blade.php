@@ -10,7 +10,7 @@
         <h1>Popular</h1>
       </div>
       <div class="col-6 text-end">
-        <a href="#" class="btn-first">View All</a>
+        <a href="{{ route('products.index') }}" class="btn-first">View All</a>
       </div>
     </div>
     <div class="row mt-5">
@@ -94,7 +94,7 @@
         <h1>Latest</h1>
       </div>
       <div class="col-6 text-end">
-        <a href="#" class="btn-first">View All</a>
+        <a href="{{ route('products.index') }}" class="btn-first">View All</a>
       </div>
     </div>
     <div class="row mt-5">
