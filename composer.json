@@ -17,6 +17,7 @@
         "spatie/laravel-html": "^3.9"
     },
     "require-dev": {
+        "codedungeon/phpunit-result-printer": "^0.1.0",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",

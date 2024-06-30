@@ -36,7 +36,7 @@
 </li>
 @empty
     <li class="list-group-item py-3">
-        <span class="text-danger">no delivery service found, try another courier!</span>
+        <span class="text-danger">No delivery service found, try another courier!</span>
     </li>
 @endforelse
 
