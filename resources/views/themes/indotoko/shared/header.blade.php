@@ -1,14 +1,19 @@
 <nav class="navbar navbar-expand-lg bg-light fixed-top py-4 shadow-sm">
       <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">Indo<span>Toko</span></a>
+        <a class="navbar-brand" href="{{ url('/') }}">Recycle<span>Mart</span></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="input-group mx-auto mt-5 mt-lg-0">
-              <input type="text" class="form-control" placeholder="Mau cari apa?" aria-label="Mau cari apa?" aria-describedby="button-addon2">
-              <button class="btn btn-outline-warning" type="button" id="button-addon2"><i class="bx bx-search" ></i></button>
-            </div>
+            <div class="d-flex w-100">
+              <div class="col-sm-6 justify-content-center mx-auto px-0" style="">
+                  <form action="{{ route('products.index') }}" class="w-100">
+                      <div class="input-group mr-3 mt-10 mt-lg-0" style="max-width: 800px; width:100%">
+                          <input type="text" name="keyword" class="form-control" placeholder="Mau cari apa?" aria-label="Mau cari apa?" aria-describedby="button-addon2" @if (request('keyword')) value="{{ request('keyword') }}" @endif>
+                          <button class="btn btn-outline-warning" type="submit" id="button-addon2"><i class="bx bx-search"></i></button>
+                      </div>
+                  </form>
+              </div>
             <ul class="navbar-nav ms-auto mt-3 mt-sm-0">
               <li class="nav-item me-3">
                 <a class="nav-link active" href="#">
@@ -19,21 +24,10 @@
               <li class="nav-item me-5">
                 <a class="nav-link" href="{{ route('carts.index') }}">
                   <i class="bx bx-cart-alt"></i>
-                  <span class="badge text-bg-warning rounded-circle position-absolute">3</span>
+                  <span class="badge text-bg-warning rounded-circle position-absolute"></span>
                 </a>
               </li>
-              <!-- mobile menu -->
-              <div class="dropdown mt-3 d-lg-none">
-                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Menu
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">Home</a></li>
-                  <li><a class="dropdown-item" href="#">Best Seller</a></li>
-                  <li><a class="dropdown-item" href="#">New Arrival</a></li>
-                  <li><a class="dropdown-item" href="#">Blog</a></li>
-                </ul>
-              </div>
+              
               @guest
                   @if (Route::has('login'))
                     <li class="nav-item mt-5 mt-lg-0 text-center">
@@ -43,7 +37,7 @@
 
                   @if (Route::has('register'))
                     <li class="nav-item mt-3 mt-lg-0 text-center">
-                      <a class="nav-link btn-first" href="{{ route('login') }}">Register</a>
+                      <a class="nav-link btn-first" href="{{ route('register') }}">Register</a>
                     </li>
                   @endif
               @else

@@ -3,6 +3,7 @@
 namespace Modules\Shop\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
@@ -42,18 +43,17 @@ class ProductController extends Controller
             '?sort=publish_date&order=desc' => 'Newest Item',
         ];
     }
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
+
     public function index(Request $request)
     {
         $priceFilter = $this->getPriceRangeFilter($request);
+        $keywordFilter = $this->keyword($request);
 
         $options = [
             'per_page' => $this->perPage,
             'filter' => [
                 'price' => $priceFilter,
+                'keyword' => $keywordFilter
             ],
         ];
 
@@ -64,10 +64,12 @@ class ProductController extends Controller
         if ($request->get('sort')) {
             $sort = $this->sortingRequest($request);
             $options['sort'] = $sort;
-
             $this->sortingQuery = '?sort=' . $sort['sort'] . '&order=' . $sort['order'];
-            
             $this->data['sortingQuery'] = $this->sortingQuery;
+        }
+
+        if ($request->get('keyword')) {
+            $this->data['filter']['keyword'] = $keywordFilter;
         }
         
         $this->data['products'] = $this->productRepository->findAll($options);
@@ -112,7 +114,6 @@ class ProductController extends Controller
     public function show($categorySlug, $productSlug)
     {
         $sku = Arr::last(explode('-', $productSlug));
-       
         $product = $this->productRepository->findBySKU($sku);
 
         $this->data['product'] = $product;
@@ -137,7 +138,8 @@ class ProductController extends Controller
         ];
     }
 
-    function sortingRequest(Request $request) {
+    function sortingRequest(Request $request)
+    {
         $sort = [];
 
         if ($request->get('sort') && $request->get('order')) {
@@ -153,5 +155,40 @@ class ProductController extends Controller
         }
 
         return $sort;
+    }
+
+    public function keyword($request)
+    {
+        if (!$request->get('keyword')) {
+            return '';
+        }
+        
+        return $request->get('keyword');
+    }
+
+    public function create()
+    {
+        return $this->loadTheme('products.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'sku' => ['required', 'unique:products', 'max:100'],
+            'name' => ['required', 'max:100'],
+            'price' => ['required', 'numeric', 'min:1'],
+            'stock' => ['required', 'numeric', 'min:0'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('products/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+ 
+        // Retrieve the validated input...
+        $validated = $validator->validated();
+
+        return $validated;
     }
 }

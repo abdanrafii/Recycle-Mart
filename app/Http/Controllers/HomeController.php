@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Shop\Repositories\Front\Interfaces\CartRepositoryInterface;
+
 
 class HomeController extends Controller
 {
@@ -11,9 +13,12 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+    protected $cartRepository;
+
+    public function __construct(CartRepositoryInterface $cartRepository)
     {
-        // $this->middleware('auth');
+        $this->cartRepository = $cartRepository;
     }
 
     /**
@@ -23,6 +28,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('themes.indotoko.home');
+        $cart = $this->cartRepository->findByUser(auth()->user());
+
+        return view('themes.indotoko.home', $cart);
     }
 }

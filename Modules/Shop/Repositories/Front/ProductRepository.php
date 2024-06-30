@@ -8,22 +8,20 @@ use Modules\Shop\Entities\Tag;
 use Modules\Shop\Repositories\Front\Interfaces\ProductRepositoryInterface;
 
 class ProductRepository implements ProductRepositoryInterface {
-
     public function findAll($options = [])
     {
         $perPage = $options['per_page'] ?? null;
         $categorySlug = $options['filter']['category'] ?? null;
         $tagSlug = $options['filter']['tag'] ?? null;
         $priceFilter = $options['filter']['price'] ?? null;
+        $keywordFilter = $options['filter']['keyword'] ?? null;
         $sort = $options['sort'] ?? null;
 
         $products = Product::with(['categories', 'tags']);
 
         if ($categorySlug) {
             $category = Category::where('slug', $categorySlug)->firstOrFail();
-
             $childCategoryIDs = Category::childIDs($category->id);
-
             $categoryIDs = array_merge([$category->id], $childCategoryIDs);
 
             $products = $products->whereHas('categories', function ($query) use ($categoryIDs) {
@@ -33,7 +31,6 @@ class ProductRepository implements ProductRepositoryInterface {
 
         if ($tagSlug) {
             $tag = Tag::where('slug', $tagSlug)->firstOrFail();
-
             $products = $products->whereHas('tags', function ($query) use ($tag) {
                 $query->where('shop_tags.id', $tag->id);
             });
@@ -41,7 +38,11 @@ class ProductRepository implements ProductRepositoryInterface {
 
         if ($priceFilter) {
             $products = $products->where('price', '>=', $priceFilter['min'])
-                ->where('price', '<=', $priceFilter['max']);
+                                 ->where('price', '<=', $priceFilter['max']);
+        }
+
+        if ($keywordFilter) {
+            $products = $products->where('name', 'like', '%' . $keywordFilter . '%');
         }
 
         if ($sort) {

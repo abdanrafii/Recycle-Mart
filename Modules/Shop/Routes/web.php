@@ -17,6 +17,8 @@ use Modules\Shop\Http\Controllers\ProductController;
 use Modules\Shop\Http\Controllers\OrderController;
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/products/create', [ProductController::class, 'store'])->name('products.store');
 Route::get('/category/{categorySlug}', [ProductController::class, 'category'])->name('products.category');
 Route::get('/tag/{tagSlug}', [ProductController::class, 'tag'])->name('products.tag');
 
