@@ -2,9 +2,13 @@
 
 namespace Modules\Shop\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use Modules\Shop\Entities\Cart;
+use Modules\Shop\Entities\Shop;
 
 class ShopController extends Controller
 {
@@ -14,21 +18,50 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return $this->loadTheme('shop.index');
+        $carts = Cart::where('user_id', auth()->id())->count();
+        $this->data['carts'] = $carts;
+
+        $shop = Shop::where('owner_id', auth()->id())->first();
+        $this->data['shop'] = $shop;
+        
+        return $this->loadTheme('shop.index', $this->data);
     }
 
     public function setup()
     {
-        return $this->loadTheme('shop.setup');
+        $carts = Cart::where('user_id', auth()->id())->count();
+        $this->data['carts'] = $carts;
+
+        return $this->loadTheme('shop.setup', $this->data);
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('shop::create');
+        $validatedData = $request->validate([
+            'name' => 'required|unique:shop_shops',
+            'body' => 'required',
+            'featured_image' => 'image|file|max:1024'
+        ]);
+
+        if($request->file('featured_image')) {
+            $validatedData['featured_image'] = $request->file('featured_image')->store('img');
+        }
+
+        $validatedData['owner_id'] = auth()->user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100);
+        $validatedData['slug'] = Str::slug($validatedData['name']);
+
+        Shop::create($validatedData);
+
+        $user['is_seller'] = true;
+
+        User::where('id', auth()->user()->id)->update($user);
+
+        return $this->loadTheme('shop.index');
     }
 
     /**

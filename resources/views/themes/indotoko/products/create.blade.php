@@ -16,7 +16,7 @@
     <div class="container">
         <form method="post" action="{{ route('products.store') }}">
           @csrf
-          <div class="card mt-5">
+          <div class="card">
             <div class="card-header">
               <h3>New Product</h3>
             </div>

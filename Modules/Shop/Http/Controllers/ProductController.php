@@ -200,7 +200,10 @@ class ProductController extends Controller
 
     public function create()
     {
-        return $this->loadTheme('products.create');
+        $carts = Cart::where('user_id', auth()->id())->count();
+        $this->data['carts'] = $carts;
+
+        return $this->loadTheme('products.create', $this->data);
     }
 
     public function store(Request $request)
