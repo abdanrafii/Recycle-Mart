@@ -267,6 +267,14 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->index('payment_type');
         });
+
+        Schema::create('shop_product_images', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('product_id')->index();
+            $table->string('image');
+
+            $table->foreign('product_id')->references('id')->on('shop_products');
+        });
     }
 
     /**

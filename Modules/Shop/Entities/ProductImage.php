@@ -15,7 +15,7 @@ class ProductImage extends Model
 
     protected $fillable = [
         'product_id',
-        'name',
+        'image',
     ];
     
     protected static function newFactory()

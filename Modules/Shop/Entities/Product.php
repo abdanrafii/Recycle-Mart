@@ -96,7 +96,7 @@ class Product extends Model
 
     public function images()
 	{
-		return $this->hasMany('Modules\Shop\Entities\ProductImage', 'product_id');
+		return $this->hasMany(ProductImage::class, 'product_id');
 	}
 
     public function getPriceLabelAttribute()
