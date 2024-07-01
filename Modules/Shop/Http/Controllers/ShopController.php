@@ -14,7 +14,12 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view('shop::index');
+        return $this->loadTheme('shop.index');
+    }
+
+    public function setup()
+    {
+        return $this->loadTheme('shop.setup');
     }
 
     /**

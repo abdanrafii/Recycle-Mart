@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Shop\Http\Controllers\CartController;
 use Modules\Shop\Http\Controllers\ProductController;
 use Modules\Shop\Http\Controllers\OrderController;
+use Modules\Shop\Http\Controllers\ShopController;
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
@@ -32,6 +33,12 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/carts/{id}/remove', [CartController::class, 'destroy'])->name('carts.destroy');
     Route::post('/carts', [CartController::class, 'store'])->name('carts.store');
     Route::put('/carts', [CartController::class, 'update'])->name('carts.update');
+
+    Route::get('shop', [ShopController::class, 'setup'])->name('shop.setup');
+});
+
+Route::middleware(['auth', 'seller'])->group(function() {
+    Route::get('shop', [ShopController::class, 'index'])->name('shop.index');
 });
 
 Route::get('/{categorySlug}/{productSlug}', [ProductController::class, 'show'])->name('products.show');

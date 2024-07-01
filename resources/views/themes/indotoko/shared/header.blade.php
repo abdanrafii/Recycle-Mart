@@ -16,7 +16,7 @@
               </div>
             <ul class="navbar-nav ms-auto mt-3 mt-sm-0">
               <li class="nav-item me-3">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href=" @if(auth()->user()->is_seller) {{ route('shop.index') }} @else {{ route('shop.setup') }} @endif ">
                   <i class='bx bx-store'></i>
                   {{-- <span class="badge text-bg-warning rounded-circle position-absolute">2</span> --}}
                 </a>
