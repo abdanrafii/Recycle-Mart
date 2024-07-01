@@ -26,6 +26,7 @@ class ProductFactory extends Factory
         $name = fake()->words(2, true);
 
         return [
+            'shop_id' => fake()->numberBetween(1,10),
 			'sku' => fake()->isbn10,
 			'type' => Product::SIMPLE,
 			'name' => $name,
@@ -35,6 +36,7 @@ class ProductFactory extends Factory
             'publish_date' => now(),
             'excerpt' => fake()->text(),
             'body' => fake()->text(),
+            'weight' => fake()->randomDigit()
         ];
     }
 }

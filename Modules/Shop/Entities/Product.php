@@ -14,6 +14,7 @@ class Product extends Model
     protected $fillable = [
         'parent_id',
 		'user_id',
+		'shop_id',
 		'sku',
 		'type',
 		'name',
@@ -63,9 +64,9 @@ class Product extends Model
         return \Modules\Shop\Database\factories\ProductFactory::new();
     }
 
-    public function user()
+    public function shop()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('Modules\Shop\Entities\Shop');
     }
 
     public function inventory()

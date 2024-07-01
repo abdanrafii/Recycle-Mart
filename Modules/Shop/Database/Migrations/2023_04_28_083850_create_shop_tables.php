@@ -43,6 +43,19 @@ return new class extends Migration
             $table->foreign('attribute_id')->references('id')->on('shop_attributes');
         });
 
+        Schema::create('shop_shops', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('owner_id')->index();
+            $table->string('name');
+            $table->string('slug');
+            $table->text('excerpt')->nullable();
+            $table->text('body')->nullable();
+            $table->string('featured_image')->nullable();
+            $table->timestamps();
+
+            $table->foreign('owner_id')->references('id')->on('users');
+        });
+
         Schema::create('shop_products', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id')->index();

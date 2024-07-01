@@ -79,8 +79,6 @@
                                 <button type="submit" class="btn btn-add-cart"><i class="bx bx-cart-alt"></i> Add to cart</button>
                             </div>
                             <div class="col-md-4 col-4">
-                                <a class="btn btn-light" href="shop-wishlist.html" data-bs-toggle="tooltip" data-bs-html="true" aria-label="Wishlist"><i class="bx bx-heart"></i></a>
-                            </div>
                         </div>
                         {{ html()->form()->close() }}
                     </div>
@@ -98,7 +96,7 @@
                                 </tr>
                                 <tr>
                                     <td>Type:</td>
-                                    <td>Fruits</td>
+                                    <td>{{ $product->type }}</td>
                                 </tr>
                                 <tr>
                                     <td>Shipping:</td>
@@ -108,7 +106,7 @@
                         </table>
                     </div>
                     <br>
-                    <p>{!! $product->excerpt !!}</p>
+                    <p class="ms-2">{!! $product->excerpt !!}</p>
                     <hr class="my-6">
                     <div class="product-share">
                         <ul>
@@ -136,18 +134,16 @@
                     </div>
                     <div class="tab-pane fade p-3" id="nav-product-reviews" role="tabpanel" aria-labelledby="nav-product-reviews-tab">
                         <div class="review-form">
-                            <h3>Write a review</h3>
-                            <form>
-                                <div class="form-group">
-                                    <label>Your Name</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Your Review</label>
-                                    <textarea cols="4" class="form-control"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                            @auth
+                                <h3>Write a review</h3>
+                                <form action="" method="">
+                                    <div class="form-group">
+                                        <label>Your Review</label>
+                                        <textarea cols="4" class="form-control my-2" placeholder="Write review as {{ auth()->user()->name }}"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            @endauth
                         </div>
                     </div>
                 </div>

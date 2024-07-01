@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Modules\Shop\Entities\Attribute;
 use Modules\Shop\Entities\Category;
+use Modules\Shop\Entities\Shop;
 use Modules\Shop\Entities\Tag;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\ProductAttribute;
@@ -23,7 +24,9 @@ class ProductTableSeeder extends Seeder
     {
         Model::unguard();
 
-        $user = User::first();
+        User::factory(5)->create();
+
+        $user = User::all();
 
         Attribute::setDefaultAttributes();
         $this->command->info('Default attributes seeded.');
@@ -37,11 +40,20 @@ class ProductTableSeeder extends Seeder
         $this->command->info('Tags seeded.');
         $randomTagIDs = Tag::all()->random()->limit(2)->pluck('id');
 
+        for ($i = 1; $i <= 5; $i++) {
+            Shop::factory()->create([
+                'owner_id' => $user[$i - 1]->id
+            ]);
+        }
+
+        $shop = Shop::all();
+
         for ($i = 1; $i <= 10; $i++) {
             $manageStock = (bool)random_int(0, 1);
 
             $product = Product::factory()->create([
-                'user_id' => $user->id,
+                'user_id' => $user[$i%5 + 1]->id,
+                'shop_id' => $shop[$i%5 + 1]->id,
                 'manage_stock' => $manageStock,
             ]);
 
@@ -62,6 +74,7 @@ class ProductTableSeeder extends Seeder
                 ]);
             }
         }
+
 
         $this->command->info('10 sample products seeded.');
     }

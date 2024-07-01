@@ -28,8 +28,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $cart = $this->cartRepository->findByUser(auth()->user());
+        // $cart = $this->cartRepository->findByUser(auth()->user());
 
-        return view('themes.indotoko.home', $cart);
+        return view('themes.indotoko.home');
     }
 }
