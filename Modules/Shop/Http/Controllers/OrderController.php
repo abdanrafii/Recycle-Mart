@@ -29,7 +29,9 @@ class OrderController extends Controller
     {
         $this->data['cart'] = $this->cartRepository->findByUser(auth()->user());
         $this->data['addresses'] = $this->addressRepository->findByUser(auth()->user());
-    
+        $cart = $this->cartRepository->findByUser(auth()->user());
+        $this->data['carts'] = $cart->items->count();
+
         return $this->loadTheme('orders.checkout', $this->data);
     }
 
