@@ -120,6 +120,9 @@ class ProductController extends Controller
         $sku = Arr::last(explode('-', $productSlug));
         $product = $this->productRepository->findBySKU($sku);
 
+        $carts = Cart::where('user_id', auth()->id())->count();
+        $this->data['carts'] = $carts;
+
         $this->data['product'] = $product;
 
         return $this->loadTheme('products.show', $this->data);
