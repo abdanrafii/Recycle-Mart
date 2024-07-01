@@ -78,8 +78,10 @@ class ProductTableSeeder extends Seeder
             $images = [
                 'sepatu1.jpg',
                 'kipas1.jpg',
-                'sepatu3.jpg',
-                'sepatu4.jpg',
+                'laptop.jpg',
+                'joran.jpg',
+                'gitar.jpg',
+                'motor.jpg',
             ];
 
             $randomImage = $images[array_rand($images)];
