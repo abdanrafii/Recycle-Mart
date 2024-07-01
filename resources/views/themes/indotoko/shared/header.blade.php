@@ -16,15 +16,15 @@
               </div>
             <ul class="navbar-nav ms-auto mt-3 mt-sm-0">
               <li class="nav-item me-3">
-                <a class="nav-link active" href="#">
-                  <i class="bx bx-heart" ></i>
-                  <span class="badge text-bg-warning rounded-circle position-absolute">2</span>
+                <a class="nav-link" href="#">
+                  <i class='bx bx-store'></i>
+                  {{-- <span class="badge text-bg-warning rounded-circle position-absolute">2</span> --}}
                 </a>
               </li>
               <li class="nav-item me-5">
                 <a class="nav-link" href="{{ route('carts.index') }}">
-                  <i class="bx bx-cart-alt"></i>
-                  <span class="badge text-bg-warning rounded-circle position-absolute"></span>
+                  <i class='bx bx-cart-alt'></i>
+                  <span class="badge text-bg-warning rounded-circle position-absolute">1</span>
                 </a>
               </li>
               
