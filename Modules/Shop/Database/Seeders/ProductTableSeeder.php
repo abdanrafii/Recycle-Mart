@@ -11,6 +11,7 @@ use Modules\Shop\Entities\Shop;
 use Modules\Shop\Entities\Tag;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\ProductAttribute;
+use Modules\Shop\Entities\ProductImage;
 use Modules\Shop\Entities\ProductInventory;
 
 class ProductTableSeeder extends Seeder
@@ -73,8 +74,12 @@ class ProductTableSeeder extends Seeder
                     'low_stock_threshold' => random_int(1,3),
                 ]);
             }
-        }
 
+            ProductImage::create([
+                'product_id' => $product->id,
+                'image' => 'sepatu1.jpg'
+            ]);
+        }
 
         $this->command->info('10 sample products seeded.');
     }

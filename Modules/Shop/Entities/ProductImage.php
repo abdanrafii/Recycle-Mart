@@ -12,6 +12,7 @@ class ProductImage extends Model
     use HasFactory, UuidTrait;
 
     protected $table = 'shop_product_images';
+    public $timestamps = false;
 
     protected $fillable = [
         'product_id',
