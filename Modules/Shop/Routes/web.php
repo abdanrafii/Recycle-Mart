@@ -34,11 +34,11 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/carts', [CartController::class, 'store'])->name('carts.store');
     Route::put('/carts', [CartController::class, 'update'])->name('carts.update');
 
-    Route::get('shop', [ShopController::class, 'setup'])->name('shop.setup');
+    Route::get('/shop', [ShopController::class, 'setup'])->name('shop.setup');
 });
 
 Route::middleware(['auth', 'seller'])->group(function() {
-    Route::get('shop', [ShopController::class, 'index'])->name('shop.index');
+    Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 });
 
 Route::get('/{categorySlug}/{productSlug}', [ProductController::class, 'show'])->name('products.show');
