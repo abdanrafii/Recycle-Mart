@@ -130,6 +130,7 @@
                     <div class="tab-pane fade show active p-3" id="nav-product-details" role="tabpanel" aria-labelledby="nav-product-details-tab">
                         <div class="my-8">
                         <p>{!! $product->body !!}</p>
+                        <h6>{{ $product->shop->name }}</h6>
                         </div>
                     </div>
                     <div class="tab-pane fade p-3" id="nav-product-reviews" role="tabpanel" aria-labelledby="nav-product-reviews-tab">
