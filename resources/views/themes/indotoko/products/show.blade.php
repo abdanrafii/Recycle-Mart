@@ -47,7 +47,7 @@
             <div class="col-md-6">
                 <div class="product-detail mt-6 mt-md-0">
                     <h1 class="mb-1">{{ $product->name }}</h1>
-                    <div class="mb-3 rating">
+                    {{-- <div class="mb-3 rating">
                         <small class="text-warning">
                             <i class="bx bxs-star"></i>
                             <i class="bx bxs-star"></i>
@@ -56,7 +56,7 @@
                             <i class="bx bxs-star-half"></i>
                         </small>
                         <a href="#" class="ms-2">(30 reviews)</a>
-                    </div>
+                    </div> --}}
                     <div class="price">
                         @if ($product->hasSalePrice)
                             <span class="active-price text-dark">IDR {{ $product->sale_price_label }}</span>
@@ -110,8 +110,8 @@
                     <hr class="my-6">
                     <div class="product-share">
                         <ul>
-                            <li><a href="#"><i class="bx bxl-facebook-circle"></i></a></li>
-                            <li><a href="#"><i class="bx bxl-pinterest"></i></a></li>
+                            {{-- <li><a href="#"><i class="bx bxl-facebook-circle"></i></a></li>
+                            <li><a href="#"><i class="bx bxl-pinterest"></i></a></li> --}}
                             <li><a href="#"><i class="bx bxl-whatsapp"></i></a></li>
                         </ul>
                     </div>
