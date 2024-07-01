@@ -22,14 +22,14 @@ class Shop extends Model
 
     protected $table = 'shop_shops';
 
-    public function ow()
+    public function owner()
     {
         return $this->belongsTo('App\Models\User');
     }
 
     public function products()
     {
-        return $this->hasMany('Modules\Shop\Entities\Product', 'product_id')->orderBy('price', 'ASC');
+        return $this->hasMany('Modules\Shop\Entities\Product', 'id')->orderBy('price', 'ASC');
     }
 
     public function images()

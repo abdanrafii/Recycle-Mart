@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Modules\Shop\Entities\Cart;
+use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\Shop;
 
 class ShopController extends Controller
@@ -23,6 +24,9 @@ class ShopController extends Controller
 
         $shop = Shop::where('owner_id', auth()->id())->first();
         $this->data['shop'] = $shop;
+
+        $products = Product::where('shop_id', $shop->id)->paginate(5);
+        $this->data['products'] = $products;
         
         return $this->loadTheme('shop.index', $this->data);
     }
@@ -61,7 +65,16 @@ class ShopController extends Controller
 
         User::where('id', auth()->user()->id)->update($user);
 
-        return $this->loadTheme('shop.index');
+        $carts = Cart::where('user_id', auth()->id())->count();
+        $this->data['carts'] = $carts;
+
+        $shop = Shop::where('owner_id', auth()->id())->first();
+        $this->data['shop'] = $shop;
+
+        $products = Product::where('shop_id', $shop->id)->paginate(8);
+        $this->data['products'] = $products;
+
+        return $this->loadTheme('shop.index', $this->data);
     }
 
     /**
