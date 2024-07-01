@@ -31,12 +31,12 @@ class ProductFactory extends Factory
 			'type' => Product::SIMPLE,
 			'name' => $name,
 			'slug' => Str::slug($name),
-			'price' => fake()->randomFloat,
+			'price' => fake()->numberBetween(9000,9000000),
 			'status' => Product::ACTIVE,
             'publish_date' => now(),
             'excerpt' => fake()->text(),
             'body' => fake()->text(),
-            'weight' => fake()->randomDigit()
+            'weight' => fake()->numberBetween(1,10),
         ];
     }
 }
