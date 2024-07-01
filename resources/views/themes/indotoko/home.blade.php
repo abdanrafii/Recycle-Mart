@@ -33,7 +33,7 @@
       </div>
       <div class="col-lg-3 col-6">
         <div class="card card-body p-lg-4 p3">
-          <a href="#"><img src="{{ asset('/img/kipas2.jpg') }}" alt="" class="img-fluid"></a>
+          <a href="#"><img src="{{ asset('/img/kipas1.jpg') }}" alt="" class="img-fluid"></a>
           <h3 class="product-name mt-3">Product 2</h3>
           {{-- <div class="rating">
             <i class="bx bxs-star"></i>
@@ -50,7 +50,7 @@
       </div>
       <div class="col-lg-3 col-6 mt-3 mt-lg-0">
         <div class="card card-body p-lg-4 p3">
-          <a href="#"><img src="{{ asset('themes/indotoko/assets/img/shop_03.jpg') }}" alt="" class="img-fluid"></a>
+          <a href="#"><img src="{{ asset('/img/sepatu1.jpg') }}" alt="" class="img-fluid"></a>
           <h3 class="product-name mt-3">Product 3</h3>
           {{-- <div class="rating">
             <i class="bx bxs-star"></i>

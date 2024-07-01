@@ -16,7 +16,7 @@
               </div>
             <ul class="navbar-nav ms-auto mt-3 mt-sm-0">
               <li class="nav-item me-3">
-                <a class="nav-link" href=" @if(auth()->user()->is_seller) {{ route('shop.index') }} @endif ">
+                <a class="nav-link" href=" @if(Auth::user()->is_seller) {{ route('shop.index') }} @endif ">
                   <i class='bx bx-store'></i>
                   {{-- <span class="badge text-bg-warning rounded-circle position-absolute">2</span> --}}
                 </a>
@@ -24,7 +24,7 @@
               <li class="nav-item me-5">
                 <a class="nav-link" href="{{ route('carts.index') }}">
                   <i class='bx bx-cart-alt'></i>
-                  <span class="badge text-bg-warning rounded-circle position-absolute">1</span>
+                  <span class="badge text-bg-warning rounded-circle position-absolute"> {{ $carts }}</span>
                 </a>
               </li>
               

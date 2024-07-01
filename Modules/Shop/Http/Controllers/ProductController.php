@@ -10,6 +10,7 @@ use Illuminate\Support\Arr;
 use Modules\Shop\Repositories\Front\Interfaces\ProductRepositoryInterface;
 use Modules\Shop\Repositories\Front\Interfaces\CategoryRepositoryInterface;
 use Modules\Shop\Repositories\Front\Interfaces\TagRepositoryInterface;
+use Modules\Shop\Entities\Cart;
 
 class ProductController extends Controller
 {
@@ -46,10 +47,13 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+
         $priceFilter = $this->getPriceRangeFilter($request);
         $keywordFilter = $this->keyword($request);
-
+        $carts = Cart::where('user_id', auth()->id())->count();
+        $this->data['carts'] = $carts;
         $options = [
+
             'per_page' => $this->perPage,
             'filter' => [
                 'price' => $priceFilter,

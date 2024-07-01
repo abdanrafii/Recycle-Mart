@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Modules\Shop\Repositories\Front\Interfaces\CartRepositoryInterface;
+use Modules\Shop\Entities\Cart;
 
 
 class HomeController extends Controller
@@ -29,7 +30,8 @@ class HomeController extends Controller
     public function index()
     {
         // $cart = $this->cartRepository->findByUser(auth()->user());
+        $carts = Cart::where('user_id', auth()->id())->count();
 
-        return view('themes.indotoko.home');
+        return view('themes.indotoko.home', compact('carts'));
     }
 }

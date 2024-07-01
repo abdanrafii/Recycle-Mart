@@ -30,6 +30,8 @@ class CartController extends Controller
         $cart = $this->cartRepository->findByUser(auth()->user());
         $this->data['cart'] = $cart;
 
+        $this->data['carts'] = $cart->items->count();
+
         return $this->loadTheme('carts.index', $this->data);
     }
 
