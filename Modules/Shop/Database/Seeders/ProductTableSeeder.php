@@ -75,9 +75,18 @@ class ProductTableSeeder extends Seeder
                 ]);
             }
 
+            $images = [
+                'sepatu1.jpg',
+                'kipas1.jpg',
+                'sepatu3.jpg',
+                'sepatu4.jpg',
+            ];
+
+            $randomImage = $images[array_rand($images)];
+
             ProductImage::create([
                 'product_id' => $product->id,
-                'image' => 'sepatu1.jpg'
+                'image' => $randomImage
             ]);
         }
 
