@@ -82,9 +82,14 @@ class ProductController extends Controller
         return $this->loadTheme('products.index', $this->data);
     }
 
-    public function category($categorySlug)
+    public function category($categorySlug, Request $request)
     {
+        $priceFilter = $this->getPriceRangeFilter($request);
+        $keywordFilter = $this->keyword($request);
+
         $category = $this->categoryRepository->findBySlug($categorySlug);
+        $carts = Cart::where('user_id', auth()->id())->count();
+        $this->data['carts'] = $carts;
 
         $options = [
             'per_page' => $this->perPage,
@@ -93,7 +98,23 @@ class ProductController extends Controller
             ]
         ];
 
+        if ($request->get('price')) {
+            $this->data['filter']['price'] = $priceFilter;
+        }
+
+        if ($request->get('sort')) {
+            $sort = $this->sortingRequest($request);
+            $options['sort'] = $sort;
+            $this->sortingQuery = '?sort=' . $sort['sort'] . '&order=' . $sort['order'];
+            $this->data['sortingQuery'] = $this->sortingQuery;
+        }
+
+        if ($request->get('keyword')) {
+            $this->data['filter']['keyword'] = $keywordFilter;
+        }
+        
         $this->data['products'] = $this->productRepository->findAll($options);
+
         $this->data['category'] = $category;
 
         return $this->loadTheme('products.category', $this->data);

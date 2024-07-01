@@ -5,8 +5,9 @@
     <div class="container">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Products</li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Products</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Category</li>
             </ol>
         </nav>
     </div>
@@ -29,25 +30,8 @@
                             &nbsp;
                         </div>
                         <div class="d-flex mt-2 mt-lg-0">
-                            <div class="me-2 flex-grow-1">
-                                <!-- select option -->
-                                <select class="form-select">
-                                    <option selected="">Show: 50</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                </select>
-                            </div>
                             <div>
-                                <!-- select option -->
-                                <select class="form-select">
-                                    <option selected="">Sort by: Featured</option>
-                                    <option value="Low to High">Price: Low to High</option>
-                                    <option value="High to Low"> Price: High to Low</option>
-                                    <option value="Release Date"> Release Date</option>
-                                    <option value="Avg. Rating"> Avg. Rating</option>
-
-                                </select>
+                                {!! html()->select('sorting', $sortingOptions, $sortingQuery)->class(['form-select'])->attribute('onchange', 'this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);') !!}
                             </div>
                         </div>
                     </div>
@@ -56,7 +40,7 @@
                     @forelse ($products as $product)
                         @include('themes.indotoko.products.product_box', ['product' => $product])
                     @empty
-                        <p>Product empty</p>
+                        <p>Category empty</p>
                     @endforelse
                 </div>
                 <div class="row mt-5">
