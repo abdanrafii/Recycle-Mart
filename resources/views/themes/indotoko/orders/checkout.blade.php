@@ -26,7 +26,7 @@
                             @csrf
                             <div class="d-flex justify-content-between">
                                 <h5 class="mb-0"><i class='bx bx-map'></i> Delivery Address</h5>
-                                <a href="{{ route('orders.address') }}" class="btn btn-outline-secondary btn-sm">Add a new address</a>
+                                {{-- <a href="{{ route('orders.address') }}" class="btn btn-outline-secondary btn-sm">Add a new address</a> --}}
                             </div>
                             <div class="mt-3">
                                 <div class="row">
@@ -98,7 +98,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-6 col-md-6 col-lg-7">
                                                 <div class="d-flex">
-                                                    <img src="{{ asset('img/p1.jpg') }}" alt="Ecommerce" style="height: 70px;">
+                                                    <img src="{{ asset('img/' . $item->product->images[0]->image) }}" alt="Ecommerce" style="height: 70px;">
                                                     <div class="ms-3">
                                                         <a href="{{ shop_product_link($item->product) }}">
                                                             <h6 class="mb-0">{{ $item->product->name }}</h6>

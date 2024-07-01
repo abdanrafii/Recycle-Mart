@@ -159,6 +159,8 @@ class OrderController extends Controller
     }
 
     private function add_address(Request $request) {
+        dd('checkout method called');
+        
         $this->data['addresses'] = $this->addressRepository->findByUser(auth()->user());
         $cart = $this->cartRepository->findByUser(auth()->user());
         $this->data['carts'] = $cart->items->count();
