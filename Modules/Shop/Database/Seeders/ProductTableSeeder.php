@@ -74,6 +74,7 @@ class ProductTableSeeder extends Seeder
                     'low_stock_threshold' => random_int(1,3),
                 ]);
             }
+        }
 
             $images = [
                 'sepatu1.jpg',
@@ -82,16 +83,50 @@ class ProductTableSeeder extends Seeder
                 'joran.jpg',
                 'gitar.jpg',
                 'motor.jpg',
+                'helmputih.jpg',
+                'helmhitam.jpg',
+                'sepatufaza.jpg',
+                'sepaturizki.jpg',
+                'motormerah.jpg',
+                'p1.jpg',
+                'p2.jpg',
+                'p3.jpg',
+                // 'p4.jpg',
             ];
-
-            $randomImage = $images[array_rand($images)];
-
-            ProductImage::create([
-                'product_id' => $product->id,
-                'image' => $randomImage
-            ]);
-        }
+            
+            // Dapatkan semua produk dari database
+            $products = Product::all();
+            $productCount = $products->count();
+            $imageCount = count($images);
+            
+            if ($productCount >= $imageCount) {
+                // Campurkan gambar
+                shuffle($images);
+            
+                // Variabel untuk melacak gambar yang telah digunakan
+                $usedImages = [];
+                $imageIndex = 0;
+            
+                foreach ($products as $product) {
+                    // Periksa apakah kita masih memiliki gambar untuk dipetakan
+                    if ($imageIndex < $imageCount) {
+                        $image = $images[$imageIndex];
+                        $imageIndex++;
+                        
+                        // Simpan gambar yang dipilih ke database
+                        if (!ProductImage::where('image', $image)->exists()) {
+                            ProductImage::create([
+                                'product_id' => $product->id,
+                                'image' => $image,
+                            ]);
+                            $usedImages[] = $image; // Catat gambar yang digunakan
+                        }
+                    }
+                }
+            }
+        
 
         $this->command->info('10 sample products seeded.');
-    }
+}
+
 }
