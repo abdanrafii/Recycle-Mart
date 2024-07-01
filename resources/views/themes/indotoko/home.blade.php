@@ -20,7 +20,7 @@
           <a href="{{ shop_product_link($product) }}"><img src=" @if($product->images->count() > 0) {{ asset('img/' . $product->images[0]->image) }} @else https://placehold.co/600x800 @endif" data-src=" https://placehold.co/600x800" alt="" class="img-fluid"></a>
           <h3 class="product-name mt-3">{{ $product->name }}</h3>
           <div class="detail d-flex justify-content-between align-items-center mt-4">
-              <p class="price">IDR {{ $product->price }}</p>
+              <p class="price">IDR {{ $product->price_label }}</p>
               <a href="#" class="btn-cart"><i class="bx bx-cart-alt"></i></a>
           </div>
         </div>
@@ -48,7 +48,7 @@
           <a href="{{ shop_product_link($product) }}"><img src=" @if($product->images->count() > 0) {{ asset('img/' . $product->images[0]->image) }} @else https://placehold.co/600x800 @endif" alt="" class="img-fluid"></a>
           <h3 class="product-name mt-3">{{ $product->name }}</h3>
           <div class="detail d-flex justify-content-between align-items-center mt-4">
-              <p class="price">IDR {{ $product->price }}</p>
+              <p class="price">IDR {{ $product->price_label }}</p>
               <a href="#" class="btn-cart"><i class="bx bx-cart-alt"></i></a>
           </div>
         </div>
