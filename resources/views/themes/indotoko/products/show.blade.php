@@ -23,7 +23,6 @@
                         @foreach ($images->skip(1) as $item)
                         <div class="carousel-item"> <img src="{{ asset('img/' . $item->image) }}" alt="Product 2"> </div>
                         @endforeach
-
                     </div> <!-- Left right -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#product-images" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
