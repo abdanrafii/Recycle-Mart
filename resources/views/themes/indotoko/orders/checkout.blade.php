@@ -26,7 +26,7 @@
                             @csrf
                             <div class="d-flex justify-content-between">
                                 <h5 class="mb-0"><i class='bx bx-map'></i> Delivery Address</h5>
-                                <a href="#" class="btn btn-outline-secondary btn-sm">Add a new address</a>
+                                <a href="{{ route('orders.address') }}" class="btn btn-outline-secondary btn-sm">Add a new address</a>
                             </div>
                             <div class="mt-3">
                                 <div class="row">

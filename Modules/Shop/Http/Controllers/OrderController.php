@@ -157,4 +157,12 @@ class OrderController extends Controller
 
         return $availableServices;
     }
+
+    private function add_address(Request $request) {
+        $this->data['addresses'] = $this->addressRepository->findByUser(auth()->user());
+        $cart = $this->cartRepository->findByUser(auth()->user());
+        $this->data['carts'] = $cart->items->count();
+
+        return $this->loadTheme('orders.address', $this->data);
+    }
 }
