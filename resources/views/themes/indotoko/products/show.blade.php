@@ -19,10 +19,11 @@
                 <div id="product-images" class="carousel slide" data-ride="carousel">
                     <!-- slides -->
                     <div class="carousel-inner">
-                        <div class="carousel-item active"> <img src="{{ asset('img/kipas1.jpg') }}" alt="Product 1"> </div>
-                        <div class="carousel-item"> <img src="{{ asset('img/kipas2.jpg') }}" alt="Product 2"> </div>
-                        <div class="carousel-item"> <img src="{{ asset('img/kipas3.jpg') }}" alt="Product 3"> </div>
-                        <div class="carousel-item"> <img src="{{ asset('img/kipas4.jpg') }}" alt="Product 4"> </div>
+                        <div class="carousel-item active"> <img src="{{ asset('img/' . $images[0]->image) }}" alt="Product 1"> </div>
+                        @foreach ($images->skip(1) as $item)
+                        <div class="carousel-item"> <img src="{{ asset('img/' . $item->image) }}" alt="Product 2"> </div>
+                        @endforeach
+
                     </div> <!-- Left right -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#product-images" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

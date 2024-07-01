@@ -1,6 +1,6 @@
 <div class="col-lg-3 col-6">
     <div class="card card-product card-body p-lg-4 p3">
-        <a href="{{ shop_product_link($product) }}"><img src="https://placehold.co/600x800" alt="" class="img-fluid"></a>
+        <a href="{{ shop_product_link($product) }}"><img src=" @if($product->images->count() > 0) {{ asset('img/' . $product->images[0]->image) }} @else https://placehold.co/600x800 @endif" data-src=" https://placehold.co/600x800" alt="" class="img-fluid"></a>
         <h3 class="product-name mt-3">{{ $product->name }}</h3>
         {{-- <div class="rating">
             <i class="bx bxs-star"></i>

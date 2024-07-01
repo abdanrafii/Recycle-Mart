@@ -11,6 +11,7 @@ use Modules\Shop\Repositories\Front\Interfaces\ProductRepositoryInterface;
 use Modules\Shop\Repositories\Front\Interfaces\CategoryRepositoryInterface;
 use Modules\Shop\Repositories\Front\Interfaces\TagRepositoryInterface;
 use Modules\Shop\Entities\Cart;
+use Modules\Shop\Entities\ProductImage;
 
 class ProductController extends Controller
 {
@@ -124,6 +125,9 @@ class ProductController extends Controller
         $this->data['carts'] = $carts;
 
         $this->data['product'] = $product;
+
+        $images = ProductImage::where('product_id', $product->id)->orderBy('image', 'asc')->get();
+        $this->data['images'] = $images;
 
         return $this->loadTheme('products.show', $this->data);
     }
