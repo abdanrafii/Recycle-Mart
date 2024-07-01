@@ -17,7 +17,7 @@
           @csrf
           <div class="card">
             <div class="card-header">
-              <h3>Setup Toko</h3>
+              <h3 class="mt-2">Setup Toko</h3>
             </div>
             <div class="card-body">
                 <div class="mb-3">

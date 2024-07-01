@@ -53,8 +53,8 @@ class ProductTableSeeder extends Seeder
             $manageStock = true;
 
             $product = Product::factory()->create([
-                'user_id' => $user[($i-1)%5 + 1]->id,
-                'shop_id' => $shop[($i-1)%5 + 1]->id,
+                'user_id' => $user[($i)%5 + 1]->id,
+                'shop_id' => $shop[($i)%5 + 1]->id,
                 'manage_stock' => $manageStock,
             ]);
 
