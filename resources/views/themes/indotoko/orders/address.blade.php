@@ -22,7 +22,7 @@
             <div class="card-body">
                 <div class="mb-3">
                   <label class="form-label">Label Alamat</label>
-                  <input type="text" class="form-control @error('name') is-invalid @enderror" name="label" value="{{ old('name') }}" placeholder="Label Toko" required>
+                  <input type="text" class="form-control @error('name') is-invalid @enderror" name="label" value="{{ old('name') }}" placeholder="Label Alamat" required>
                   @error('label')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -39,8 +39,8 @@
                   @enderror
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Alamat</label>
-                  <input type="text" class="form-control" name="address1" value="{{ old('address1') }}"  placeholder="Nama" required>
+                  <label class="form-label">Alamat 1</label>
+                  <input type="text" class="form-control" name="address1" value="{{ old('address1') }}"  placeholder="Alamat" required>
                   @error('address1')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -48,8 +48,17 @@
                   @enderror
                 </div>
                 <div class="mb-3">
+                  <label class="form-label">Alamat 2</label>
+                  <input type="text" class="form-control" name="address2" value="{{ old('address2') }}"  placeholder="Alamat" required>
+                  @error('address2')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
+                </div>
+                <div class="mb-3">
                   <label class="form-label">No HP</label>
-                  <input type="number" class="form-control" name="phone" value="{{ old('phone') }}"  placeholder="Nama" required>
+                  <input type="text" class="form-control" name="phone" value="{{ old('phone') }}"  placeholder="No HP" required>
                   @error('phone')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -58,7 +67,7 @@
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Kode Kota</label>
-                  <input type="number" class="form-control" name="city" value="{{ old('city') }}"  placeholder="Nama" required>
+                  <input type="number" class="form-control" name="city" value="{{ old('city') }}"  placeholder="Kode Kota" required>
                   @error('city')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -67,7 +76,7 @@
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Kode Provinsi</label>
-                  <input type="number" class="form-control" name="province" value="{{ old('province') }}"  placeholder="Nama" required>
+                  <input type="number" class="form-control" name="province" value="{{ old('province') }}"  placeholder="Kode Provinsi" required>
                   @error('province')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -76,7 +85,7 @@
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Kode Pos</label>
-                  <input type="number" class="form-control" name="postcode" value="{{ old('postcode') }}"  placeholder="Nama" required>
+                  <input type="number" class="form-control" name="postcode" value="{{ old('postcode') }}"  placeholder="Kode Pos" required>
                   @error('postcode')
                   <div class="invalid-feedback">
                     {{ $message }}

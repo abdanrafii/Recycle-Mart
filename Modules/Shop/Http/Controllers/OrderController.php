@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Modules\Shop\Entities\Address;
 use Modules\Shop\Repositories\Front\Interfaces\AddressRepositoryInterface;
 use Modules\Shop\Repositories\Front\Interfaces\CartRepositoryInterface;
 use Modules\Shop\Repositories\Front\Interfaces\OrderRepositoryInterface;
@@ -27,6 +28,40 @@ class OrderController extends Controller
    
     public function checkout()
     {
+        $this->data['cart'] = $this->cartRepository->findByUser(auth()->user());
+        $this->data['addresses'] = $this->addressRepository->findByUser(auth()->user());
+        $cart = $this->cartRepository->findByUser(auth()->user());
+        $this->data['carts'] = $cart->items->count();
+
+        return $this->loadTheme('orders.checkout', $this->data);
+    }
+
+    public function address() {        
+        $this->data['addresses'] = $this->addressRepository->findByUser(auth()->user());
+        $cart = $this->cartRepository->findByUser(auth()->user());
+        $this->data['carts'] = $cart->items->count();
+
+        return $this->loadTheme('orders.address', $this->data);
+    }
+
+    public function add_address(Request $request) {        
+        $validatedData = $request->validate([
+            'label' => 'required',
+            'first_name' => 'required',
+            'phone' => 'required|numeric',
+            'address1' => 'required',
+            'address2' => 'required',
+            'city' => 'required',
+            'province' => 'required',
+            'postcode' => 'required',
+        ]);
+
+        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['last_name'] = '-';
+        $validatedData['is_primary'] = true;
+
+        Address::create($validatedData);
+
         $this->data['cart'] = $this->cartRepository->findByUser(auth()->user());
         $this->data['addresses'] = $this->addressRepository->findByUser(auth()->user());
         $cart = $this->cartRepository->findByUser(auth()->user());
@@ -156,15 +191,5 @@ class OrderController extends Controller
         }
 
         return $availableServices;
-    }
-
-    private function add_address(Request $request) {
-        dd('checkout method called');
-        
-        $this->data['addresses'] = $this->addressRepository->findByUser(auth()->user());
-        $cart = $this->cartRepository->findByUser(auth()->user());
-        $this->data['carts'] = $cart->items->count();
-
-        return $this->loadTheme('orders.address', $this->data);
     }
 }
