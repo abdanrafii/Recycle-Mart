@@ -117,7 +117,7 @@
                                 <!-- text -->
                                 <p>
                                     <small>
-                                        By placing your order, you agree to be bound by the Freshcart
+                                        By placing your order, you agree to be bound by the RecycleMart
                                         <a href="#!">Terms of Service</a>
                                         and
                                         <a href="#!">Privacy Policy.</a>
