@@ -11,7 +11,7 @@
         </div> --}}
         <div class="detail d-flex justify-content-between align-items-center mt-4">
             <p class="price">IDR {{ $product->price_label }}</p>
-            <a href="shop_product_link($product)" class="btn-cart"><i class="bx bx-cart-alt"></i></a>
+            <a href="{{ shop_product_link($product) }}" class="btn-cart"><i class="bx bx-cart-alt"></i></a>
         </div>
     </div>
 </div>
